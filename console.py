@@ -6,6 +6,7 @@ from models.base_model import BaseModel
 from models.__init__ import storage
 from models.user import User
 from models.place import Place
+from create_command import do_create
 from models.state import State
 from models.city import City
 from models.amenity import Amenity
@@ -29,6 +30,10 @@ class HBNBCommand(cmd.Cmd):
              'max_guest': int, 'price_by_night': int,
              'latitude': float, 'longitude': float
             }
+
+    def do_create(self, arg):
+        """Create a new instance of a class with parameters."""
+        do_create(self, arg)
 
     def preloop(self):
         """Prints if isatty is false"""
