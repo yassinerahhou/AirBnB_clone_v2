@@ -6,7 +6,6 @@ from models.base_model import BaseModel
 from models.__init__ import storage
 from models.user import User
 from models.place import Place
-from create_command import do_create
 from models.state import State
 from models.city import City
 from models.amenity import Amenity
@@ -31,9 +30,7 @@ class HBNBCommand(cmd.Cmd):
              'latitude': float, 'longitude': float
             }
 
-    def do_create(self, arg):
-        """Create a new instance of a class with parameters."""
-        do_create(self, arg)
+    
 
     def preloop(self):
         """Prints if isatty is false"""
@@ -109,6 +106,30 @@ class HBNBCommand(cmd.Cmd):
         """ Handles EOF to exit program """
         print()
         exit()
+
+    def do_create(self, line):
+        """Creates a new instance of BaseModel, saves it
+        Exceptions:
+            SyntaxError: when there is no args given
+            NameError: when there is no object taht has the name
+        """
+        try:
+            if not line:
+                raise SyntaxError()
+            my_list = line.split(" ")
+            obj = eval("{}()".format(my_list[0]))
+            # New code
+            for index in range(1, len(my_list)):
+                p_v = self.valid_param(my_list[index])
+                if p_v:
+                    obj.__dict__[p_v[0]] = p_v[1]
+            # End new code
+            obj.save()
+            print("{}".format(obj.id))
+        except SyntaxError:
+            print("** class name missing **")
+        except NameError:
+            print("** class doesn't exist **")
 
     def help_EOF(self):
         """ Prints the help documentation for EOF """
