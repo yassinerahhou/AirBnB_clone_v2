@@ -107,29 +107,66 @@ class HBNBCommand(cmd.Cmd):
         print()
         exit()
 
-    def do_create(self, line):
-        """Creates a new instance of BaseModel, saves it
-        Exceptions:
-            SyntaxError: when there is no args given
-            NameError: when there is no object taht has the name
-        """
-        try:
-            if not line:
-                raise SyntaxError()
-            my_list = line.split(" ")
-            obj = eval("{}()".format(my_list[0]))
-            # New code
-            for index in range(1, len(my_list)):
-                p_v = self.valid_param(my_list[index])
-                if p_v:
-                    obj.__dict__[p_v[0]] = p_v[1]
-            # End new code
-            obj.save()
-            print("{}".format(obj.id))
-        except SyntaxError:
+    def do_create(self, arg):
+        """Creates a new instance of a class"""
+        sh = shlex.shlex(arg)
+        args = []
+        while True:
+            token = sh.get_token()
+            if not token:
+                break
+            args.append(token)
+        if len(args) == 0:
             print("** class name missing **")
-        except NameError:
+            return False
+        if args[0] in classes:
+            instance = classes[args[0]]()
+            number_of_args = len(args)
+            for i in range(1, number_of_args):
+                if args[i] == "=":
+                    before = i - 1
+                    after = i + 1
+                    key = args[before]
+                    value = args[after]
+                    length = len(value)
+                    is_float = False
+                    is_string = False
+                    new_val = ""
+                    if value[0] == "\"":
+                        for i in range(length):
+                            if value[i] == '"':
+                                if i != 0 and i != length - 1:
+                                    new_val += '\"'
+                                else:
+                                    continue
+                            elif value[i] == "_":
+                                new_val += " "
+                            else:
+                                new_val += value[i]
+                        is_string = True
+                    else:
+                        p = after + 1
+                        try:
+                            if args[p] == ".":
+                                d = p + 1
+                                try:
+                                    new_val = float(value + args[p] + args[d])
+                                except:
+                                    break
+                                is_float = True
+                        except:
+                            pass
+                    if not is_float and not is_string:
+                        try:
+                            new_val = int(value)
+                        except:
+                            break
+                    setattr(instance, key, new_val)
+        else:
             print("** class doesn't exist **")
+            return False
+        print(instance.id)
+        instance.save()
 
     def help_EOF(self):
         """ Prints the help documentation for EOF """
