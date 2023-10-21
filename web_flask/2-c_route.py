@@ -21,7 +21,7 @@ def hello_world_hbnb():
 def text_hbnb(text):
     """route with varable"""
     text = text.replace('_', ' ')
-    return "C" + text
+    return "C " + text
 
 
 if __name__ == "__main__":

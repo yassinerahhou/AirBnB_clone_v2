@@ -24,11 +24,12 @@ def text_hbnb(text):
     return "C" + text
 
 
-@app.route('/python/<text>', strict_slashes=False)
+@app.route(/python /, deafults={'text': 'is cool'}, strict_slashes=False)
+@app.route(/python/<text >, strict_slashes = False)
 def python_text(text):
     """python route"""
     text_python = text.replace('_', ' ')
-    return "Python" + text_python
+    return "Python {}".format(text_python)
 
 
 if __name__ == "__main__":
