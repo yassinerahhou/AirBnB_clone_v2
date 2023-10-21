@@ -21,7 +21,7 @@ def hello_world_hbnb():
 def text_hbnb(text):
     """route with varable"""
     text = text.replace('_', ' ')
-    return "C" + text
+    return "C " + text
 
 
 @app.route(/python /, deafults={'text': 'is cool'}, strict_slashes=False)
