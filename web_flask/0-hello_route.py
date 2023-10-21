@@ -1,13 +1,13 @@
 #!/usr/bin/python3
-# task 0
+""" task 0 """
 from flask import Flask
 
 app = Flask(__name__)
 
 
 @app.route("/", strict_slashes=False)
-# fun that run xd
 def hello_world():
+""" route it / """
     return "Hello HBNB!"
 
 
