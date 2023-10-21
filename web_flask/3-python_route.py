@@ -28,8 +28,8 @@ def text_hbnb(text):
 @app.route(/python/<text >, strict_slashes = False)
 def python_text(text):
     """python route"""
-    text_python = text.replace('_', ' ')
-    return "Python {}".format(text_python)
+    text = text.replace('_', ' ')
+    return "Python {}".format(text)
 
 
 if __name__ == "__main__":
