@@ -1,15 +1,21 @@
 #!/usr/bin/python3
 from flask import Flask
-
+"""inh instance"""
 app = Flask(__name__)
 
 
 @app.route("/", strict_slashes=False)
+"""first route function"""
+
+
 def hello_world():
     return "Hello HBNB!"
 
 
 @app.route('/hbnb', strict_slashes=False)
+"""s route function"""
+
+
 def hello_world_hbnb():
     return "HBNB"
 
