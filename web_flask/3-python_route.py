@@ -19,13 +19,13 @@ def hello_world_hbnb():
 
 @app.route('/c/<text>', strict_slashes=False)
 def text_hbnb(text):
-    """route with varable"""
+    """route with variable"""
     text = text.replace('_', ' ')
     return "C " + text
 
 
-@app.route(/python /, deafults={'text': 'is cool'}, strict_slashes=False)
-@app.route(/python/<text >, strict_slashes = False)
+@app.route('/python/', defaults={'text': 'is cool'}, strict_slashes=False)
+@app.route('/python/<text>', strict_slashes=False)
 def python_text(text):
     """python route"""
     text = text.replace('_', ' ')
@@ -34,3 +34,4 @@ def python_text(text):
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
+
