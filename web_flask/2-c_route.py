@@ -20,7 +20,8 @@ def hello_world_hbnb():
 @app.route('/c/<text>', strict_slashes=False)
 def text_hbnb(text):
     """route with varable"""
-    return f"C {text}"
+    text = text.replace('_', ' ')
+    return "C" + text"
 
 
 if __name__ == "__main__":
