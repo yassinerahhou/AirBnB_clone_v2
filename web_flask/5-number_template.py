@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# make instance
+"""make instance"""
 from flask import Flask, render_template
 
 app = Flask(__name__)
