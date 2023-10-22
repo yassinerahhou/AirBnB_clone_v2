@@ -10,7 +10,7 @@ from sqlalchemy.orm import relationship
 
 class City(BaseModel, Base):
     """Represents a city for a MySQL database.
-    
+
     """
     __tablename__ = "cities"
     name = Column(String(128), nullable=False)
